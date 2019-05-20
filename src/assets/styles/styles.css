@@ -26,3 +26,23 @@ body {
 .app {
 	display: flex;
 }
+
+.namesOfDayInWeek {
+	display: flex;
+}
+
+.namesOfDayInWeek > * {
+	width: 25px;
+	height: 25px;
+	margin: 5px;
+}
+
+.week {
+	display: flex;
+}
+
+.week > * {
+	width: 25px;
+	height: 25px;
+	margin: 5px;
+}

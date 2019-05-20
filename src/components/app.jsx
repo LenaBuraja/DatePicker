@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/styles/styles.css';
-import CalenderJSX from './calender';
+import InputDateJSX from './InputDate';
 
 export default class App extends React.Component {
 	constructor() {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="app">
-				<CalenderJSX />
+				<InputDateJSX />
 			</div>
 		);
 	}

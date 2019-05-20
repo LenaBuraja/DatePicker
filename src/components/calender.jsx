@@ -1,27 +1,26 @@
 import React from 'react';
 import '../assets/styles/styles.css';
+import DaysInMonthJSX from './DaysInMonth';
 
 export default class CalenderJSX extends React.Component {
 	constructor() {
     super();
     this.state = {
-      showCalender: true
+      //showCalender: true
+      showCalender: false
     }
 	}
 
 	render() {
 		return (
-			<div className="inputDate">
-        <div className="field">
-          <input type="text" className="value"/>
-          <div
-            className="showCalender"
-            onClick={() => {
-              this.setState({showCalender: !this.state.showCalender});
-            }}
-          >Click</div>
+			<div className="calender">
+        <div>Calender</div>
+        <div className="month">Month</div>
+        <div className="year">Year</div>
+        <div className="days">Days</div>
+        <div className="today">
+          <DaysInMonthJSX />
         </div>
-        <div className="calender" hidden={this.state.showCalender}>Calender</div>
 			</div>
 		);
 	}
