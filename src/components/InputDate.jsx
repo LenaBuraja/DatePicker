@@ -26,6 +26,10 @@ export default class InputDateJSX extends React.Component {
     this.setState({selectDay: newSelectDay});
   }
 
+  changeSelectMonth = (newSelectMonth) => {
+    this.setState({selectMonth: newSelectMonth});
+  }
+
   formatDate() {
     let day = this.state.selectDate.getDate().toString();
     day = day.length === 1 ? `0${day}` : day
@@ -46,14 +50,19 @@ export default class InputDateJSX extends React.Component {
             onChange={event => {this.onChangeDate(event.currentTarget.value)} }
           />
           <div
-            className="showCalender"
+            className="imgCalender"
             onClick={() => {
               this.setState({showCalender: !this.state.showCalender});
             }}
-          >Click</div>
+          ></div>
         </div>
         <div hidden={this.state.showCalender}>
-          <CalenderJSX onChangeSelectDay={this.changeSelectDay} selectDay={this.state.selectDay} />
+          <CalenderJSX
+            onChangeSelectDay={this.changeSelectDay}
+            selectDay={this.state.selectDay}
+            onChangeSelectMonth={this.changeSelectMonth}
+            selectMonth={this.state.selectMonth}
+          />
         </div>
 			</div>
 		);

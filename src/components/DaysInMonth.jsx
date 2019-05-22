@@ -19,18 +19,18 @@ export default class DaysInMonthJSX extends React.Component {
   }
 
   tableDays() {
-    const month = new Date(2019, 1, 1).getMonth();
+    const month = new Date(2019, this.props.selectMonth, 1).getMonth();
     const year = new Date(2019, 1, 1).getFullYear();
-    let days = Array.from({length: this.daysInMonth(month + 1, year)}, (v, k) => 
+    let days = Array.from({length: this.daysInMonth(this.props.selectMonth + 1, year)}, (v, k) => 
       <div
         className={this.props.selectDay === k+1 ? 'selectDay' : 'otherDay'}
         onClick={() => this.props.onChangeSelectDay(k+1)}
         key={v}
       >{k+1}</div>
     );
-    const dow = this.dayOfWeek(new Date(year, month, 1));
+    const dow = this.dayOfWeek(new Date(year, this.props.selectMonth, 1));
     if(dow !== 0) {
-      const lastDayInPrevMounth = this.daysInMonth(month, year);
+      const lastDayInPrevMounth = this.daysInMonth(this.props.selectMonth, year);
       days = [...Array.from(Array(dow - 1), (v, k) => 
         <div className='prevMonth' key={v}>{lastDayInPrevMounth-dow+k+1}</div>
       )].concat(days);
@@ -71,4 +71,5 @@ export default class DaysInMonthJSX extends React.Component {
 DaysInMonthJSX.propsType = {
 	onChangeSelectDay: PropsType.func.isRequired,
 	selectDay: PropsType.number.isRequired,
+	selectMonth: PropsType.number.isRequired,
 }
