@@ -29,20 +29,45 @@ body {
 
 .namesOfDayInWeek {
 	display: flex;
+	justify-content: center;
 }
 
 .namesOfDayInWeek > * {
 	width: 25px;
 	height: 25px;
 	margin: 5px;
+	color: #144182;
 }
 
 .week {
 	display: flex;
+	justify-content: center;
 }
 
 .week > * {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 25px;
 	height: 25px;
 	margin: 5px;
+	border-radius: 8px;
+	text-align: center;
+	color: #144182;
+	border: 2px solid #FFFFFF;
+}
+
+.selectDay {
+	background-color: #4776b9;
+	color: #FFFFFF;
+	border: 2px solid #FFFFFF;
+}
+
+.prevMonth, .nextMonth {
+	color: #abb49b;
+	border: 2px solid #FFFFFF;
+}
+
+.otherDay:hover, .prevMonth:hover, .nextMonth:hover, .selectDay:hover {
+	border: 2px solid #abb49b ;
 }

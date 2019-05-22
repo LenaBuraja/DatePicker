@@ -1,6 +1,7 @@
 import React from 'react';
 import '../assets/styles/styles.css';
 import DaysInMonthJSX from './DaysInMonth';
+import PropsType from 'prop-types';
 
 export default class CalenderJSX extends React.Component {
 	constructor() {
@@ -19,9 +20,14 @@ export default class CalenderJSX extends React.Component {
         <div className="year">Year</div>
         <div className="days">Days</div>
         <div className="today">
-          <DaysInMonthJSX />
+          <DaysInMonthJSX onChangeSelectDay={this.props.onChangeSelectDay} selectDay={this.props.selectDay} />
         </div>
 			</div>
 		);
 	}
+}
+
+CalenderJSX.propsType = {
+	onChangeSelectDay: PropsType.func.isRequired,
+	selectDay: PropsType.number.isRequired,
 }
