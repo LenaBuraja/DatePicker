@@ -8,38 +8,50 @@ export default class InputDateJSX extends React.Component {
     this.state = {
       //showCalender: true
       showCalender: false,
-      selectDate: new Date(),
+      selectDate: '',
       selectDay: new Date().getDate(),
       selectMonth: new Date().getMonth(),
       selectYear: new Date().getFullYear()
     }
   }
-  
-  onChangeDate(newDate) {
-    let day, month, year;
-    [newDate, day, month, year] = String(newDate).match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
-    this.setState({selectDate: new Date(year, month, day)});
-    console.log(this.state.selectDate)
+
+  setDate() {
+    if(!/(31|30|2[0-9]|1[0-9]|0[1-9]|[1-9]){1}\.(12|11|10|0[1-9]|[1-9]){1}\.([1-2]{1}[0-9]{3}|[0-9]{2})/.test(this.state.selectDate)) {
+      console.log('Строка не прошла проверку')
+      this.setState({selectDate: ''});
+    } else {
+      let newDate, day, month, year;
+      [newDate, day, month, year] = String(this.state.selectDate).match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+      this.setState({selectDay: Number(day), selectMonth: Number(month - 1), selectYear: year});
+      day = day.length === 1 ? `0${day}` : day
+      month = month.length === 1 ? `0${month}` : month
+      this.setState({selectDate: `${day}.${month}.${year}`});
+      console.log(this.state.selectDate)
+    }
   }
 
   changeSelectDay = (newSelectDay) => {
     this.setState({selectDay: newSelectDay});
+    const day = newSelectDay.toString().length === 1 ? `0${newSelectDay}` : newSelectDay
+    const month = (this.state.selectMonth + 1).toString().length === 1 ? `0${this.state.selectMonth + 1}` : this.state.selectMonth + 1
+    this.setState({selectDate: `${day}.${month}.${this.state.selectYear}`});
+
   }
 
   changeSelectMonth = (newSelectMonth) => {
     this.setState({selectMonth: newSelectMonth});
+    const day = this.state.selectDay.toString().length === 1 ? `0${this.state.selectDay}` : this.state.selectDay
+    const month = (newSelectMonth + 1).toString().length === 1 ? `0${newSelectMonth + 1}` : newSelectMonth + 1
+    this.setState({selectDate: `${day}.${month}.${this.state.selectYear}`});
+
   }
 
   changeSelectYear = (newSelectYear) => {
     this.setState({selectYear: newSelectYear});
-  }
+    const day = this.state.selectDay.toString().length === 1 ? `0${this.state.selectDay}` : this.state.selectDay
+    const month = (this.state.selectMonth + 1).toString().length === 1 ? `0${this.state.selectMonth + 1}` : this.state.selectMonth + 1
+    this.setState({selectDate: `${day}.${month}.${newSelectYear}`});
 
-  formatDate() {
-    let day = this.state.selectDate.getDate().toString();
-    day = day.length === 1 ? `0${day}` : day
-    let month = (this.state.selectDate.getMonth() + 1).toString();
-    month = month.length === 1 ? `0${month}` : month
-    return `${day}.${month}.${this.state.selectDate.getFullYear()}`
   }
 
 	render() {
@@ -49,9 +61,11 @@ export default class InputDateJSX extends React.Component {
           <input
             type="text"
             className="value"
-            pattern="(31|30|2[0-9]|1[0-9]|0[1-9]|[1-9]){1}\.(12|11|10|0[1-9]|[1-9]){1}\.([1-2]{1}[0-9]{3}|[0-9]{2})"
-            value={this.formatDate()}
-            onChange={event => {this.onChangeDate(event.currentTarget.value)} }
+            value={this.state.selectDate}
+            onChange={event => {this.setState({selectDate: event.currentTarget.value})} }
+            onBlur={() => {
+              this.setDate()
+            }}
           />
           <div
             className="imgCalender"
