@@ -19,8 +19,8 @@ export default class DaysInMonthJSX extends React.Component {
   }
 
   tableDays() {
-    const month = new Date(2019, this.props.selectMonth, 1).getMonth();
-    const year = new Date(2019, 1, 1).getFullYear();
+    const month = new Date(this.props.selectYear, this.props.selectMonth, 1).getMonth();
+    const year = new Date(this.props.selectYear, 1, 1).getFullYear();
     let days = Array.from({length: this.daysInMonth(this.props.selectMonth + 1, year)}, (v, k) => 
       <div
         className={this.props.selectDay === k+1 ? 'selectDay' : 'otherDay'}
@@ -72,4 +72,5 @@ DaysInMonthJSX.propsType = {
 	onChangeSelectDay: PropsType.func.isRequired,
 	selectDay: PropsType.number.isRequired,
 	selectMonth: PropsType.number.isRequired,
+	selectYear: PropsType.number.isRequired,
 }

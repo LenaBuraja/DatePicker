@@ -16,7 +16,7 @@ body {
 .field {
 	display: flex;
 	flex-direction: row;
-	border: 1px solid black;
+	border: 1px solid #040615;
 	align-items: center;
 }
 
@@ -25,10 +25,12 @@ body {
 }
 
 .calender {
-	border: 1px solid black;
+	border: 1px solid #040615;
+	border-radius: 0px 0px 10px 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: #040615;
 }
 
 .app {
@@ -46,8 +48,13 @@ margin: 5px;
 
 .monthes {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.groupMonthes{
+	display: flex;
 }
 
 .nameMonth {
@@ -76,7 +83,7 @@ margin: 5px;
 .namesOfDayInWeek > * {
 	width: 25px;
 	height: 25px;
-	margin: 5px;
+	margin: 1px;
 	color: #144182;
 }
 
@@ -91,7 +98,7 @@ margin: 5px;
 	justify-content: center;
 	width: 25px;
 	height: 25px;
-	margin: 5px;
+	margin: 1px;
 	border-radius: 8px;
 	text-align: center;
 	color: #144182;

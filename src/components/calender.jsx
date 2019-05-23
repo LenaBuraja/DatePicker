@@ -18,10 +18,13 @@ export default class CalenderJSX extends React.Component {
 	render() {
 		return (
 			<div className="calender">
-        <div>Calender</div>
         <div className="month-and-year">
-          <div className="month" onClick={() => {this.setState({showSelectMonth: !this.state.showSelectMonth})}}>Month</div>
-          <div className="year">Year</div>
+          <div className="month" onClick={() => {this.setState({showSelectMonth: !this.state.showSelectMonth})}}>{namesMonthes[this.props.selectMonth]}</div>
+          <select name="year" id="year" value={this.props.selectYear} onChange={(e) => this.props.onChangeSelectYear(e.currentTarget.value)}>
+            {
+              Array.from(Array(new Date().getFullYear() - 1949), (v, k) => <option value={k + 1960}>{k + 1960}</option>)
+            }
+          </select>
         </div>
         {
           this.state.showSelectMonth ?
@@ -35,26 +38,31 @@ export default class CalenderJSX extends React.Component {
                     this.setState({showSelectMonth: !this.state.showSelectMonth})
                   }}
                 >{item}</div>}).reduce((p,c)=>{
-              if(p[p.length-1].length == 3){
+              if(p[p.length-1].length == 4){
                 p.push([]);
               }
             p[p.length-1].push(c);
             return p;
-          }, [[]]).map((item, idx) => {return <div key={idx}>{item}</div>})}
+          }, [[]]).map((item, idx) => {return <div className="groupMonthes" key={idx}>{item}</div>})}
             </div>
           :
           <div>
-            <div className="days">Days</div>
-              <DaysInMonthJSX
-                onChangeSelectDay={this.props.onChangeSelectDay}
-                selectDay={this.props.selectDay}
-                selectMonth={this.props.selectMonth}
-              />
-              <div className="today" onClick={() => {this.props.onChangeSelectDay(new Date().getDate())}}>Сегодня
-            </div>
+            <DaysInMonthJSX
+              onChangeSelectDay={this.props.onChangeSelectDay}
+              selectDay={this.props.selectDay}
+              selectMonth={this.props.selectMonth}
+              selectYear={this.props.selectYear}
+            />
+            <div
+              className="today"
+              onClick={() => {
+                this.props.onChangeSelectDay(new Date().getDate());
+                this.props.onChangeSelectMonth(new Date().getMonth());
+                this.props.onChangeSelectYear(new Date().getFullYear());
+              }}
+            >Сегодня</div>
           </div>
         }
-        
 			</div>
 		);
 	}
@@ -65,4 +73,6 @@ CalenderJSX.propsType = {
 	selectDay: PropsType.number.isRequired,
 	onChangeSelectMonth: PropsType.func.isRequired,
 	selectMonth: PropsType.number.isRequired,
+	onChangeSelectYear: PropsType.func.isRequired,
+	selectYear: PropsType.number.isRequired,
 }

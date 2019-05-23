@@ -30,6 +30,10 @@ export default class InputDateJSX extends React.Component {
     this.setState({selectMonth: newSelectMonth});
   }
 
+  changeSelectYear = (newSelectYear) => {
+    this.setState({selectYear: newSelectYear});
+  }
+
   formatDate() {
     let day = this.state.selectDate.getDate().toString();
     day = day.length === 1 ? `0${day}` : day
@@ -62,6 +66,8 @@ export default class InputDateJSX extends React.Component {
             selectDay={this.state.selectDay}
             onChangeSelectMonth={this.changeSelectMonth}
             selectMonth={this.state.selectMonth}
+            onChangeSelectYear={this.changeSelectYear}
+            selectYear={this.state.selectYear}
           />
         </div>
 			</div>
