@@ -6,8 +6,7 @@ export default class InputDateJSX extends React.Component {
 	constructor() {
     super();
     this.state = {
-      //showCalender: true
-      showCalender: false,
+      showCalender: true,
       selectDate: '',
       selectDay: new Date().getDate(),
       selectMonth: new Date().getMonth(),
@@ -17,7 +16,6 @@ export default class InputDateJSX extends React.Component {
 
   setDate() {
     if(!/(31|30|2[0-9]|1[0-9]|0[1-9]|[1-9]){1}\.(12|11|10|0[1-9]|[1-9]){1}\.([1-2]{1}[0-9]{3}|[0-9]{2})/.test(this.state.selectDate)) {
-      console.log('Строка не прошла проверку')
       this.setState({selectDate: ''});
     } else {
       let newDate, day, month, year;
@@ -26,7 +24,6 @@ export default class InputDateJSX extends React.Component {
       day = day.length === 1 ? `0${day}` : day
       month = month.length === 1 ? `0${month}` : month
       this.setState({selectDate: `${day}.${month}.${year}`});
-      console.log(this.state.selectDate)
     }
   }
 
@@ -63,6 +60,7 @@ export default class InputDateJSX extends React.Component {
             className="value"
             value={this.state.selectDate}
             onChange={event => {this.setState({selectDate: event.currentTarget.value})} }
+            onFocus={() => {this.setState({showCalender: false})}}
             onBlur={() => {
               this.setDate()
             }}

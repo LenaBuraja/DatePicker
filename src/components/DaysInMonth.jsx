@@ -46,30 +46,38 @@ export default class DaysInMonthJSX extends React.Component {
 		return (
 			<div className="daysInMonth">
         <div className="namesOfDayInWeek">
-          <div>Пн</div>
-          <div>Вт</div>
-          <div>Ср</div>
-          <div>Чт</div>
-          <div>Пт</div>
-          <div>Сб</div>
-          <div>ВС</div>
+          <div key={'Пн'}>Пн</div>
+          <div key={'Вт'}>Вт</div>
+          <div key={'Ср'}>Ср</div>
+          <div key={'Чт'}>Чт</div>
+          <div key={'Пт'}>Пт</div>
+          <div key={'Сб'}>Сб</div>
+          <div key={'ВС'}>ВС</div>
         </div>
-        {
-          this.tableDays(this.state.selectDay).reduce((p,c)=>{
-              if(p[p.length-1].length == 7){
-                p.push([]);
-              }
-            p[p.length-1].push(c);
-            return p;
-          }, [[]]).map((item, idx) => {return <div className="week" key={idx}>{item}</div>})
-        }
+        <div className="showMonth">
+          <div className="showPrevMonth" onClick={() => {this.props.onChangeSelectMonth(this.props.selectMonth - 1);}}></div>
+          <div className="weeks">
+            {
+              this.tableDays(this.state.selectDay).reduce((p,c)=>{
+                  if(p[p.length-1].length == 7){
+                    p.push([]);
+                  }
+                p[p.length-1].push(c);
+                return p;
+              }, [[]]).map((item, idx) => {return <div className="week" key={idx}>{item}</div>})
+            }
+          </div>
+          <div className="showNextMonth" onClick={() => {this.props.onChangeSelectMonth(this.props.selectMonth + 1);}}></div>
+        </div>
+        
 			</div>
 		);
 	}
 }
 
 DaysInMonthJSX.propsType = {
-	onChangeSelectDay: PropsType.func.isRequired,
+  onChangeSelectDay: PropsType.func.isRequired,
+  onChangeSelectMonth: PropsType.func.isRequired,
 	selectDay: PropsType.number.isRequired,
 	selectMonth: PropsType.number.isRequired,
 	selectYear: PropsType.number.isRequired,

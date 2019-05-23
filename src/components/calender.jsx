@@ -9,7 +9,6 @@ export default class CalenderJSX extends React.Component {
 	constructor() {
     super();
     this.state = {
-      //showCalender: true
       showCalender: false,
       showSelectMonth: false
     }
@@ -20,9 +19,14 @@ export default class CalenderJSX extends React.Component {
 			<div className="calender">
         <div className="month-and-year">
           <div className="month" onClick={() => {this.setState({showSelectMonth: !this.state.showSelectMonth})}}>{namesMonthes[this.props.selectMonth]}</div>
-          <select name="year" id="year" value={this.props.selectYear} onChange={(e) => this.props.onChangeSelectYear(e.currentTarget.value)}>
+          {//<input value={this.props.selectYear} onChange={(e) => this.props.onChangeSelectYear(e.currentTarget.value)} />
+          }<select
+            className="year"
+            value={this.props.selectYear}
+            onChange={(e) => this.props.onChangeSelectYear(e.currentTarget.value)}
+          >
             {
-              Array.from(Array(new Date().getFullYear() - 1949), (v, k) => <option value={k + 1960}>{k + 1960}</option>)
+              Array.from(Array(new Date().getFullYear() - 1949), (v, k) => <option key={k + 1960} value={k + 1960}>{k + 1960}</option>)
             }
           </select>
         </div>
@@ -37,7 +41,7 @@ export default class CalenderJSX extends React.Component {
                     this.props.onChangeSelectMonth(idx);
                     this.setState({showSelectMonth: !this.state.showSelectMonth})
                   }}
-                >{item}</div>}).reduce((p,c)=>{
+                >{item.slice(0, 3)}</div>}).reduce((p,c)=>{
               if(p[p.length-1].length == 4){
                 p.push([]);
               }
@@ -52,6 +56,7 @@ export default class CalenderJSX extends React.Component {
               selectDay={this.props.selectDay}
               selectMonth={this.props.selectMonth}
               selectYear={this.props.selectYear}
+              onChangeSelectMonth={this.props.onChangeSelectMonth}
             />
             <div
               className="today"

@@ -9,7 +9,7 @@ body {
 }
 
 .value {
-	width: 300px;
+	width: 220px;
 	height: 40px;
 }
 
@@ -22,6 +22,8 @@ body {
 
 .field > input {
 	border: none;
+	font-size: 14pt;
+	padding: 10px;
 }
 
 .calender {
@@ -35,6 +37,9 @@ body {
 
 .app {
 	display: flex;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
 }
 
 .month-and-year {
@@ -43,7 +48,15 @@ body {
 }
 
 .month-and-year > * {
-margin: 5px;
+	margin: 5px;
+}
+
+.month {
+	cursor: pointer;
+}
+
+.selectYear {
+	height: 70px;
 }
 
 .monthes {
@@ -61,7 +74,7 @@ margin: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 70px;
+	width: 50px;
 	height: 50px;
 	margin: 0px 2px;
 	border: 2px solid #FFFFFF;
@@ -87,6 +100,27 @@ margin: 5px;
 	color: #144182;
 }
 
+.showMonth {
+	display: flex;
+	align-items: center;
+}
+
+.showPrevMonth {
+	background: url(/src/assets/styles/images/prev.png);
+	width: 25px;
+	height: 25px;
+	background-size: cover;
+	cursor: pointer;
+}
+
+.showNextMonth {
+	background: url(/src/assets/styles/images/next.png);
+	background-size: cover;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+
 .week {
 	display: flex;
 	justify-content: center;
@@ -109,11 +143,17 @@ margin: 5px;
 	background-color: #4776b9;
 	color: #FFFFFF;
 	border: 2px solid #FFFFFF;
+	cursor: pointer;
+}
+
+.otherDay {
+	cursor: pointer;
 }
 
 .prevMonth, .nextMonth {
 	color: #abb49b;
 	border: 2px solid #FFFFFF;
+	cursor: pointer;
 }
 
 .otherDay:hover, .prevMonth:hover, .nextMonth:hover, .selectDay:hover {
@@ -130,6 +170,8 @@ margin: 5px;
 }
 
 .today {
+	margin: 5px;
+	text-align: center;
 	color: #040615;
 	cursor: pointer;
 }
