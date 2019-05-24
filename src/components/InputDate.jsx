@@ -6,7 +6,8 @@ export default class InputDateJSX extends React.Component {
 	constructor() {
     super();
     this.state = {
-      showCalender: true,
+      //showCalender: true,
+      showCalender: false,
       selectDate: '',
       selectDay: new Date().getDate(),
       selectMonth: new Date().getMonth(),

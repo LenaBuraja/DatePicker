@@ -55,7 +55,17 @@ export default class DaysInMonthJSX extends React.Component {
           <div key={'ВС'}>ВС</div>
         </div>
         <div className="showMonth">
-          <div className="showPrevMonth" onClick={() => {this.props.onChangeSelectMonth(this.props.selectMonth - 1);}}></div>
+          <div
+            className="showPrevMonth"
+            onClick={() => {
+              if(this.props.selectMonth - 1 < 0) {
+                this.props.onChangeSelectMonth(11)
+                this.props.onChangeSelectYear(this.props.selectYear - 1);
+              } else {
+                this.props.onChangeSelectMonth(this.props.selectMonth - 1);
+              }
+            }}
+          ></div>
           <div className="weeks">
             {
               this.tableDays(this.state.selectDay).reduce((p,c)=>{
@@ -67,7 +77,17 @@ export default class DaysInMonthJSX extends React.Component {
               }, [[]]).map((item, idx) => {return <div className="week" key={idx}>{item}</div>})
             }
           </div>
-          <div className="showNextMonth" onClick={() => {this.props.onChangeSelectMonth(this.props.selectMonth + 1);}}></div>
+          <div
+            className="showNextMonth"
+            onClick={() => {
+              if(this.props.selectMonth + 1 > 11) {
+                this.props.onChangeSelectMonth(0)
+                this.props.onChangeSelectYear(this.props.selectYear + 1);
+              } else {
+                this.props.onChangeSelectMonth(this.props.selectMonth + 1);
+              }
+            }}
+          ></div>
         </div>
         
 			</div>
@@ -78,6 +98,8 @@ export default class DaysInMonthJSX extends React.Component {
 DaysInMonthJSX.propsType = {
   onChangeSelectDay: PropsType.func.isRequired,
   onChangeSelectMonth: PropsType.func.isRequired,
+	onChangeSelectYear: PropsType.func.isRequired,
+	selectYear: PropsType.number.isRequired,
 	selectDay: PropsType.number.isRequired,
 	selectMonth: PropsType.number.isRequired,
 	selectYear: PropsType.number.isRequired,

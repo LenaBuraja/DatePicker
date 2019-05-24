@@ -57,6 +57,7 @@ export default class CalenderJSX extends React.Component {
               selectMonth={this.props.selectMonth}
               selectYear={this.props.selectYear}
               onChangeSelectMonth={this.props.onChangeSelectMonth}
+              onChangeSelectYear={this.props.onChangeSelectYear}
             />
             <div
               className="today"
