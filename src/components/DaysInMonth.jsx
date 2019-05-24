@@ -25,18 +25,18 @@ export default class DaysInMonthJSX extends React.Component {
       <div
         className={this.props.selectDay === k+1 ? 'selectDay' : 'otherDay'}
         onClick={() => this.props.onChangeSelectDay(k+1)}
-        key={v}
+        key={`c-${k}`}
       >{k+1}</div>
     );
     const dow = this.dayOfWeek(new Date(year, this.props.selectMonth, 1));
     if(dow !== 0) {
       const lastDayInPrevMounth = this.daysInMonth(this.props.selectMonth, year);
       days = [...Array.from(Array(dow - 1), (v, k) => 
-        <div className='prevMonth' key={v}>{lastDayInPrevMounth-dow+k+1}</div>
+        <div className='prevMonth' key={`p-${k}`}>{lastDayInPrevMounth-dow+k+1}</div>
       )].concat(days);
     }
     if(days.length % 7 !== 0) {
-      days = days.concat([...Array.from(Array(7 - days.length % 7), (v, k) => <div className='nextMonth' key={v}>{k + 1}</div>)]);
+      days = days.concat([...Array.from(Array(7 - days.length % 7), (v, k) => <div className='nextMonth' key={`n-${k}`}>{k + 1}</div>)]);
     }
     return days;
   }
@@ -56,7 +56,7 @@ export default class DaysInMonthJSX extends React.Component {
         </div>
         <div className="showMonth">
           <div
-            className="showPrevMonth"
+            className="showPrev"
             onClick={() => {
               if(this.props.selectMonth - 1 < 0) {
                 this.props.onChangeSelectMonth(11)
@@ -78,7 +78,7 @@ export default class DaysInMonthJSX extends React.Component {
             }
           </div>
           <div
-            className="showNextMonth"
+            className="showNext"
             onClick={() => {
               if(this.props.selectMonth + 1 > 11) {
                 this.props.onChangeSelectMonth(0)

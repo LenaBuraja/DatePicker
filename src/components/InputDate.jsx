@@ -6,8 +6,7 @@ export default class InputDateJSX extends React.Component {
 	constructor() {
     super();
     this.state = {
-      //showCalender: true,
-      showCalender: false,
+      showCalender: true,
       selectDate: '',
       selectDay: new Date().getDate(),
       selectMonth: new Date().getMonth(),
@@ -73,7 +72,7 @@ export default class InputDateJSX extends React.Component {
             }}
           ></div>
         </div>
-        <div hidden={this.state.showCalender}>
+        <div className="select-date-in-calender" hidden={this.state.showCalender}>
           <CalenderJSX
             onChangeSelectDay={this.changeSelectDay}
             selectDay={this.state.selectDay}
